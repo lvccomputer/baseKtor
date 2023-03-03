@@ -16,4 +16,12 @@ class ExampleUnitTest {
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
     }
+
+    @Test
+    fun simpleCall() {
+       val test =  runBlocking {
+            simpleGet("https://raw.githubusercontent.com/nova-wallet/nova-utils/master/chains/types/default.json")
+        }
+        println(test)
+    }
 }

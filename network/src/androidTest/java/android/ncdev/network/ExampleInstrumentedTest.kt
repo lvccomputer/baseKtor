@@ -3,6 +3,7 @@ package android.ncdev.network
 import android.ncdev.network.core.simpleGet
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import kotlinx.coroutines.runBlocking
 
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -24,13 +25,10 @@ class ExampleInstrumentedTest {
     }
 
     @Test
-    suspend fun simpleCall() {
-        runCatching {
+    fun simpleCall() {
+        val test =  runBlocking {
             simpleGet("https://raw.githubusercontent.com/nova-wallet/nova-utils/master/chains/types/default.json")
-        }.onFailure {
-            println(it.message)
-        }.onSuccess {
-            println(it)
         }
+        println(test)
     }
 }
