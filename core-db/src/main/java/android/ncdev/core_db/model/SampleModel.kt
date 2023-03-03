@@ -5,7 +5,7 @@ import io.realm.RealmObject
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-open class TestModel(
-    var id: Int = 0,
+open class SampleModel(
+    var id: Long = 0,
     var name: String = ""
 ) : RealmObject(), Parcelable

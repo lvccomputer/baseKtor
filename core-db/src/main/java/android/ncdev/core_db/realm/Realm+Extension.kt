@@ -1,4 +1,4 @@
-package com.globwallet.core_db.realm
+package android.ncdev.core_db.realm
 
 import io.realm.*
 import kotlinx.coroutines.flow.Flow

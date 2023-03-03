@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 rootProject.name = "BaseKtorNetwork"
 include (":app")
 include(":network")
+include(":core-db")

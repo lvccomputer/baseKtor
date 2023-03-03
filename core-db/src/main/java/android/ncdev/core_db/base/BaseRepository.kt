@@ -1,7 +1,6 @@
-package com.globwallet.core_db.repository
+package android.ncdev.core_db.base
 
-import android.util.Log
-import com.globwallet.core_db.realm.detached
+import android.ncdev.core_db.realm.detached
 import io.realm.Realm
 import io.realm.RealmChangeListener
 import io.realm.RealmObject
@@ -18,7 +17,7 @@ abstract class BaseRepository<T : RealmObject> {
         (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<T>
 
     val realm: Realm get() = Realm.getDefaultInstance()
-    val realmQuery: RealmQuery<T> get()= realm.where(realmClass)
+    val realmQuery: RealmQuery<T> get() = realm.where(realmClass)
     private fun <E> realmExecute(block: (Realm) -> E): E {
         return realm.use {
             block(it)
@@ -33,21 +32,6 @@ abstract class BaseRepository<T : RealmObject> {
             }
         }
     }
-
-//    fun<E> realmExecute(isTestnet: Boolean, block: (Realm) -> E): E {
-//        val config = if (isTestnet) realmTestnetConfig else realmMainnetConfig
-//        return Realm.getInstance(config).use {
-//            block(it)
-//        }
-////    }
-//    fun realmExecuteTransaction(block: (Realm) -> Unit) {
-////        val config = if (isTestnet) realmTestnetConfig else realmMainnetConfig
-//        Realm.getInstance(config).use {
-//            it.executeTransaction {
-//                block(it)
-//            }
-//        }
-//    }
 
     open suspend fun insertOrUpdate(vararg obj: T) {
         insertOrUpdate(obj.asList())
@@ -85,7 +69,7 @@ abstract class BaseRepository<T : RealmObject> {
 
     fun findAllFlow(): Flow<List<T>> = handlerAndReturnListFlow {
         realm.where(realmClass)
-    }
+    }.flowOn(Dispatchers.IO)
 
     @OptIn(ExperimentalCoroutinesApi::class)
     fun handlerAndReturnListFlow(block: () -> RealmQuery<T>): Flow<List<T>> =
@@ -107,5 +91,5 @@ abstract class BaseRepository<T : RealmObject> {
                     realm.close()
                 }
             }
-        }.flowOn(Dispatchers.Main)
+        }.flowOn(Dispatchers.IO)
 }
