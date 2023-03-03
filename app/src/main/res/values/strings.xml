@@ -3,4 +3,8 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="connection_error">Please, check your connection or try again later</string>
+    <string name="error">Error</string>
+    <string name="unknown_error">Unknown error</string>
+
 </resources>

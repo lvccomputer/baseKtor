@@ -56,6 +56,7 @@ android {
 
 dependencies {
     implementation(project(":core-db"))
+    implementation(project(":common"))
     implementation(project(":network"))
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -101,5 +102,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
     //dimen
     implementation("com.intuit.sdp:sdp-android:1.1.0")
+
+    implementation("androidx.browser:browser:1.5.0")
 
 }

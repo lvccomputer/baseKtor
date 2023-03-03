@@ -1,10 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="colorPrimary">@color/blue</color>
+    <color name="colorPrimaryDark">@color/white</color>
+    <color name="colorAccent">#03DAC5</color>
+
+    <color name="backgroundColor">@color/white</color>
+    <color name="secondaryBackground">@color/gray_e7</color>
+    <color name="primaryBackground">@color/white</color>
+    <color name="tertiaryBackground">@color/white</color>
+    <color name="backgroundApp">@color/gray_e7</color>
+
+    <color name="primaryTextColor">@color/gray_18</color>
+    <color name="secondaryTextColor">@color/midnight_dream</color>
+    <color name="borderColor">@color/green2</color>
+    <color name="separator">@color/gray_18_alpha5</color>
+    <color name="tintIconColor">@color/gray_18</color>
+    <color name="transparent">#00000000</color>
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="blue">#1989E6</color>
+    <color name="green2">#CAECD1</color>
+    <color name="red">#FF0F1B</color>
+    <color name="red_E9">#E95050</color>
+    <color name="red_E9_alpha_10">#1AE95050</color>
+    <color name="orange">#FDA733</color>
+    <color name="yellow">#FFCD1A</color>
+    <color name="navy">#232635</color>
+    <color name="gray">#828489</color>
+    <color name="pink">#E283AF</color>
+    <color name="purple">#A871CC</color>
+    <color name="gray_18">#181E25</color>
+    <color name="gray_18_alpha5">#0D1E250D</color>
+    <color name="midnight_dream">#384657</color>
+    <color name="gray_e7">#E7EBEF</color>
+    <color name="red_radish">#EA3943</color>
+
 </resources>
