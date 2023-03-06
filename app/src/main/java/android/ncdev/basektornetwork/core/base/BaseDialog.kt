@@ -1,4 +1,4 @@
-package android.ncdev.basektornetwork.core
+package android.ncdev.basektornetwork.core.base
 
 import android.app.Dialog
 import android.content.Context

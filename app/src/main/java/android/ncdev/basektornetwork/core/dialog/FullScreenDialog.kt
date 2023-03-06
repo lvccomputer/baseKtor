@@ -3,7 +3,7 @@ package android.ncdev.basektornetwork.core.dialog
 import android.app.Dialog
 import android.graphics.drawable.ColorDrawable
 import android.ncdev.basektornetwork.R
-import android.ncdev.basektornetwork.core.BaseActivity
+import android.ncdev.basektornetwork.core.base.BaseActivity
 import android.os.Bundle
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes

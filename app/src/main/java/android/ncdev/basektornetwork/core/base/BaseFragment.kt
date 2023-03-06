@@ -1,4 +1,4 @@
-package android.ncdev.basektornetwork.core
+package android.ncdev.basektornetwork.core.base
 
 import android.ncdev.basektornetwork.R
 import android.ncdev.basektornetwork.core.toolbar.ToolbarConfiguration
@@ -8,7 +8,6 @@ import android.ncdev.basektornetwork.view.toolbar.ToolbarView
 import android.ncdev.common.coroutines.Event
 import android.ncdev.common.coroutines.EventObserver
 import android.ncdev.common.utils.hideKeyboard
-import android.ncdev.common.utils.viewbinding.viewBinding
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
