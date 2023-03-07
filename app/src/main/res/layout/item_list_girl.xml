@@ -1,27 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
-    <!--
-    grid items for RecyclerView
-    -->
-    <ImageView
+    android:layout_margin="@dimen/_4sdp"
+    android:clipToPadding="true"
+    app:cardBackgroundColor="@color/black"
+    app:cardCornerRadius="@dimen/_4sdp">
+
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imgGirl"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_150sdp"
-        android:adjustViewBounds="true"
-        android:src="@mipmap/ic_launcher" />
-
-    <TextView
-        android:id="@+id/name"
-        android:visibility="gone"
-        style="@style/TextAppearance.Description"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="ABCD" />
-</LinearLayout>
+        android:layout_gravity="center"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        tools:src="@drawable/test" />
+
+    <FrameLayout
+        android:id="@+id/frameSelected"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/red_transparent"
+        android:visibility="gone" />
+
+</androidx.cardview.widget.CardView>

@@ -117,5 +117,6 @@ dependencies {
     api("io.coil-kt:coil-svg:1.2.1") {
         exclude("com.caverock", "androidsvg-aar")
     }
+    implementation ("com.facebook.shimmer:shimmer:0.5.0")
 //    implementation ("com.github.chrisbanes:PhotoView:2.0.0")
 }

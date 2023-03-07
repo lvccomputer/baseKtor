@@ -34,5 +34,6 @@
     <color name="midnight_dream">#384657</color>
     <color name="gray_e7">#E7EBEF</color>
     <color name="red_radish">#EA3943</color>
+    <color name="red_transparent">#2FEA3943</color>
 
 </resources>

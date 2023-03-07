@@ -1,26 +1,37 @@
 package android.ncdev.basektornetwork.ui.home.adapter
 
+import android.graphics.Bitmap
 import android.ncdev.basektornetwork.databinding.ItemListGirlBinding
 import android.ncdev.common.utils.extensions.setImageUrl
 import android.ncdev.core_db.model.GirlModel
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.ImageLoader
-import coil.load
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.transition.Transition
 
-class GirlAdapter(private val onClicked: (GirlModel) -> Unit, private val imageLoader: ImageLoader) :
+
+class GirlAdapter(
+    private val onClicked: (GirlModel) -> Unit,
+    private val imageLoader: ImageLoader
+) :
     ListAdapter<GirlModel, GirlAdapter.ItemVH>(GirlDiffCallback) {
 
     class ItemVH(private val binding: ItemListGirlBinding, private val imageLoader: ImageLoader) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: GirlModel) {
-//            binding.imgGirl.load(item.url, imageLoader)
             binding.imgGirl.setImageUrl(item.url)
-            binding.name.text = item.id.toString()
+        }
+
+
+        fun bindSelectionState(isSelected: Boolean) {
+            binding.frameSelected.isVisible = isSelected
         }
     }
 
@@ -40,6 +51,21 @@ class GirlAdapter(private val onClicked: (GirlModel) -> Unit, private val imageL
         getItem(position)?.let {
             holder.bind(it)
         }
+
+    }
+
+    override fun onBindViewHolder(
+        holder: ItemVH,
+        position: Int,
+        payloads: MutableList<Any>
+    ) {
+        if (payloads.isEmpty()) {
+            super.onBindViewHolder(holder, position, payloads)
+        } else {
+            if (payloads[0] == true) {
+                holder.bindSelectionState(getItem(position).isSelected)
+            }
+        }
     }
 
     companion object {
@@ -49,9 +75,12 @@ class GirlAdapter(private val onClicked: (GirlModel) -> Unit, private val imageL
             }
 
             override fun areContentsTheSame(oldItem: GirlModel, newItem: GirlModel): Boolean {
-                return oldItem.url == newItem.url
+                return oldItem.equals(newItem)
             }
 
+            override fun getChangePayload(oldItem: GirlModel, newItem: GirlModel): Any? {
+                return if (oldItem.isSelected != newItem.isSelected) true else null
+            }
         }
     }
 }

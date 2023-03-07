@@ -2,13 +2,20 @@ package android.ncdev.basektornetwork.ui.home
 
 import android.ncdev.basektornetwork.core.base.BaseViewModel
 import android.ncdev.common.coroutines.Resource
+import android.ncdev.common.flow.inBackground
+import android.ncdev.common.flow.share
 import android.ncdev.common.utils.asLiveData
+import android.ncdev.common.utils.extensions.jsonToList
 import android.ncdev.core_db.model.GirlModel
 import android.ncdev.girl_photo.network.repository.GirlPhotoRepository
+import android.ncdev.network.extensions.toJsonString
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,10 +26,12 @@ class HomeViewModel @Inject constructor(
     private val _girlPhotoDownloadLiveData = MutableLiveData<Resource<List<GirlModel>>>()
     val girlPhotoDownloadLiveData = _girlPhotoDownloadLiveData.asLiveData()
 
-    private val _girlPhotoListLiveData = MutableLiveData<List<GirlModel>>()
-    val girlPhotoListLiveData = _girlPhotoListLiveData.asLiveData()
-    var lastId: Long = -1
-    var isLoading = false
+    private val _girlPhotoListFlow = MutableSharedFlow<List<GirlModel>>()
+    val girlPhotoListFlow =
+        _girlPhotoListFlow.asSharedFlow().inBackground().share(scope = viewModelScope)
+
+    private var idSelected = -2//default is not selected
+
     var limit = 60
 
     init {
@@ -52,21 +61,26 @@ class HomeViewModel @Inject constructor(
     }
 
     fun loadData() = viewModelScope.launch {
-        _girlPhotoDownloadLiveData.postValue(Resource.Loading)
         runCatching {
-            girlPhotoRepository.loadMore(-1, limit)
+            girlPhotoRepository.loadMore(-2, limit)
         }.onSuccess {
-            Log.e(TAG, "loadData: " + it.size + " ${it.last().id}")
-//            if (it.isNotEmpty()) {
-//                lastId = it.last().id.toLong()
-//            }
-            limit += it.size
-            isLoading = false
-            _girlPhotoDownloadLiveData.postValue(Resource.Success(it))
+            if (it.isNotEmpty()) {
+                limit += 60
+            }
+            _girlPhotoListFlow.emit(it)
         }.onFailure {
-            _girlPhotoDownloadLiveData.postValue(Resource.Success(emptyList()))
+            showError(it)
         }
+    }
 
+    fun setSelected(id: Int) = viewModelScope.launch {
+        idSelected = id
+        val listPhotoAsJson = girlPhotoListFlow.first().toJsonString()
+        val listPhotoCloned = listPhotoAsJson.jsonToList<GirlModel>().map {
+            it.isSelected = it.id == id
+            it
+        }
+        _girlPhotoListFlow.emit(listPhotoCloned)
     }
 
     companion object {
