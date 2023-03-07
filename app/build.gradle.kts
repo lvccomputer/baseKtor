@@ -7,7 +7,9 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     id("com.google.dagger.hilt.android")
     id("realm-android")
-//    id("com.google.gms.google-services")
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
+
 }
 
 android {
@@ -58,9 +60,15 @@ dependencies {
     implementation(project(":core-db"))
     implementation(project(":common"))
     implementation(project(":network"))
+    implementation(project(":girl-photo"))
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.8.0")
+
+    implementation(platform("com.google.firebase:firebase-bom:29.3.0"))
+    implementation("com.google.firebase:firebase-bom:31.2.3")
+    implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.firebase:firebase-crashlytics-ktx")
 
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
@@ -104,5 +112,10 @@ dependencies {
     implementation("com.intuit.sdp:sdp-android:1.1.0")
 
     implementation("androidx.browser:browser:1.5.0")
-
+    implementation ("com.google.android.flexbox:flexbox:3.0.0")
+    api("io.coil-kt:coil:1.2.1")
+    api("io.coil-kt:coil-svg:1.2.1") {
+        exclude("com.caverock", "androidsvg-aar")
+    }
+//    implementation ("com.github.chrisbanes:PhotoView:2.0.0")
 }

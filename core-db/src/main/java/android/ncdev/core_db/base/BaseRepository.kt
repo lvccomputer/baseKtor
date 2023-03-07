@@ -91,5 +91,5 @@ abstract class BaseRepository<T : RealmObject> {
                     realm.close()
                 }
             }
-        }.flowOn(Dispatchers.IO)
+        }.flowOn(Dispatchers.Main)
 }

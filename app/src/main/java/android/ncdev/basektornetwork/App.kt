@@ -6,7 +6,10 @@ import android.content.Context
 import android.content.pm.ActivityInfo
 import android.ncdev.core_db.realm.RealmMigrations
 import android.os.Bundle
+import android.provider.Settings
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.HiltAndroidApp
 import io.realm.Realm
 import io.realm.RealmConfiguration
@@ -28,6 +31,7 @@ class App : Application(), Application.ActivityLifecycleCallbacks {
         super.onCreate()
         app = this
         initRealm()
+        Firebase.crashlytics.setUserId(Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID))
     }
 
     private fun initRealm() {

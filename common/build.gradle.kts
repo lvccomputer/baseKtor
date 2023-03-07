@@ -65,5 +65,6 @@ dependencies {
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.2")
 
     implementation("com.karumi:dexter:6.2.3")
+    implementation("com.caverock:androidsvg:1.4")
 
 }

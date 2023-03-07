@@ -10,7 +10,9 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationBarView
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity() {
 
     private val binding by viewBinding(ActivityMainBinding::inflate)
@@ -23,7 +25,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun initNavigation(){
-        navController = (supportFragmentManager.findFragmentById(binding.navHostFragmentActivityMain.id) as NavHostFragment)
+        navController = (supportFragmentManager.findFragmentById(binding.navFragmentContainer.id) as NavHostFragment)
             .navController
         with(navController){
             graph = navInflater.inflate(R.navigation.nav_main)

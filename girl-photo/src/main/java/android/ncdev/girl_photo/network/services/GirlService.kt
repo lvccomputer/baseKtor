@@ -21,6 +21,6 @@ class GirlService : BaseUrl {
 
     @Throws(Throwable::class)
     suspend fun getGirls(): List<String> {
-        return girlSDK.get(getBaseUrl()).parseToObject()
+        return girlSDK.simpleGet(getBaseUrl()).parseToObject()
     }
 }

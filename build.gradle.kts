@@ -11,6 +11,8 @@ plugins {
 buildscript {
     dependencies {
         classpath("io.realm:realm-gradle-plugin:10.11.1")
-//        classpath("com.google.gms:google-services:4.3.15")
+        classpath("com.google.gms:google-services:4.3.15")
+        classpath("com.google.firebase:firebase-crashlytics-gradle:2.9.4")
+
     }
 }
