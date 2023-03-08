@@ -6,13 +6,18 @@ import android.ncdev.basektornetwork.databinding.FragmentHomeBinding
 import android.ncdev.basektornetwork.ui.home.adapter.GirlAdapter
 import android.ncdev.common.utils.viewbinding.viewBinding
 import android.ncdev.core_db.model.GirlModel
+import android.ncdev.girl_photo.model.GirlModelUI
+import android.util.Log
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import coil.ImageLoader
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -25,7 +30,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     @Inject
     lateinit var imageLoader: ImageLoader
     private val girlAdapter by lazy {
-        fun onClicked(girlModel: GirlModel) {
+        fun onClicked(girlModel: GirlModelUI) {
             viewModel.setSelected(girlModel.id)
         }
         GirlAdapter(::onClicked, imageLoader)
@@ -38,8 +43,10 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     override fun observeViewModels() = with(viewModel) {
         girlPhotoListFlow.observe {
-            girlAdapter.submitList(it)
-            mIsLoading = false
+            girlAdapter.submitList(it){
+                mIsLoading = false
+            }
+            viewModel.limit += 60
         }
 
     }
@@ -54,10 +61,10 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                 super.onScrolled(recyclerView, dx, dy)
                 val lastVisibleItemPosition: Int = gridLayoutManager.findLastVisibleItemPosition()
                 val totalItemCount: Int = gridLayoutManager.itemCount
-
-                if (!mIsLoading && totalItemCount <= lastVisibleItemPosition + 3) {
+                if (!mIsLoading && totalItemCount <= lastVisibleItemPosition + 50) {
                     viewModel.loadData()
                     mIsLoading = true
+
                 }
             }
         })

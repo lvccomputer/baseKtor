@@ -6,9 +6,10 @@ import android.ncdev.common.flow.inBackground
 import android.ncdev.common.flow.share
 import android.ncdev.common.utils.asLiveData
 import android.ncdev.common.utils.extensions.jsonToList
+import android.ncdev.common.utils.extensions.toJsonString
 import android.ncdev.core_db.model.GirlModel
+import android.ncdev.girl_photo.model.GirlModelUI
 import android.ncdev.girl_photo.network.repository.GirlPhotoRepository
-import android.ncdev.network.extensions.toJsonString
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -23,10 +24,10 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val girlPhotoRepository: GirlPhotoRepository,
 ) : BaseViewModel() {
-    private val _girlPhotoDownloadLiveData = MutableLiveData<Resource<List<GirlModel>>>()
+    private val _girlPhotoDownloadLiveData = MutableLiveData<Resource<List<GirlModelUI>>>()
     val girlPhotoDownloadLiveData = _girlPhotoDownloadLiveData.asLiveData()
 
-    private val _girlPhotoListFlow = MutableSharedFlow<List<GirlModel>>()
+    private val _girlPhotoListFlow = MutableSharedFlow<List<GirlModelUI>>()
     val girlPhotoListFlow =
         _girlPhotoListFlow.asSharedFlow().inBackground().share(scope = viewModelScope)
 
@@ -62,12 +63,16 @@ class HomeViewModel @Inject constructor(
 
     fun loadData() = viewModelScope.launch {
         runCatching {
+            Log.e(TAG, "loadData: "+limit)
             girlPhotoRepository.loadMore(-2, limit)
         }.onSuccess {
-            if (it.isNotEmpty()) {
-                limit += 60
-            }
-            _girlPhotoListFlow.emit(it)
+            _girlPhotoListFlow.emit(it.map {
+                GirlModelUI(
+                    id = it.id,
+                    url = it.url,
+                    isSelected = idSelected == it.id
+                )
+            })
         }.onFailure {
             showError(it)
         }
@@ -76,7 +81,7 @@ class HomeViewModel @Inject constructor(
     fun setSelected(id: Int) = viewModelScope.launch {
         idSelected = id
         val listPhotoAsJson = girlPhotoListFlow.first().toJsonString()
-        val listPhotoCloned = listPhotoAsJson.jsonToList<GirlModel>().map {
+        val listPhotoCloned = listPhotoAsJson.jsonToList<GirlModelUI>().map {
             it.isSelected = it.id == id
             it
         }

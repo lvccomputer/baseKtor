@@ -1,9 +1,8 @@
 package android.ncdev.basektornetwork.ui.home.adapter
 
-import android.graphics.Bitmap
 import android.ncdev.basektornetwork.databinding.ItemListGirlBinding
 import android.ncdev.common.utils.extensions.setImageUrl
-import android.ncdev.core_db.model.GirlModel
+import android.ncdev.girl_photo.model.GirlModelUI
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -11,22 +10,19 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.ImageLoader
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.target.SimpleTarget
-import com.bumptech.glide.request.transition.Transition
 
 
 class GirlAdapter(
-    private val onClicked: (GirlModel) -> Unit,
+    private val onClicked: (GirlModelUI) -> Unit,
     private val imageLoader: ImageLoader
 ) :
-    ListAdapter<GirlModel, GirlAdapter.ItemVH>(GirlDiffCallback) {
+    ListAdapter<GirlModelUI, GirlAdapter.ItemVH>(GirlDiffCallback) {
 
     class ItemVH(private val binding: ItemListGirlBinding, private val imageLoader: ImageLoader) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: GirlModel) {
+        fun bind(item: GirlModelUI) {
             binding.imgGirl.setImageUrl(item.url)
+            bindSelectionState(item.isSelected)
         }
 
 
@@ -69,16 +65,16 @@ class GirlAdapter(
     }
 
     companion object {
-        private val GirlDiffCallback = object : DiffUtil.ItemCallback<GirlModel>() {
-            override fun areItemsTheSame(oldItem: GirlModel, newItem: GirlModel): Boolean {
+        private val GirlDiffCallback = object : DiffUtil.ItemCallback<GirlModelUI>() {
+            override fun areItemsTheSame(oldItem: GirlModelUI, newItem: GirlModelUI): Boolean {
                 return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: GirlModel, newItem: GirlModel): Boolean {
+            override fun areContentsTheSame(oldItem: GirlModelUI, newItem: GirlModelUI): Boolean {
                 return oldItem.equals(newItem)
             }
 
-            override fun getChangePayload(oldItem: GirlModel, newItem: GirlModel): Any? {
+            override fun getChangePayload(oldItem: GirlModelUI, newItem: GirlModelUI): Any? {
                 return if (oldItem.isSelected != newItem.isSelected) true else null
             }
         }

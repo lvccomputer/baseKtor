@@ -10,7 +10,5 @@ import kotlinx.parcelize.Parcelize
 open class GirlModel(
     @PrimaryKey
     var id: Int = -1,
-    var url: String = "",
-    @Ignore
-    var isSelected: Boolean = false
+    var url: String = ""
 ) : RealmObject(), Parcelable
