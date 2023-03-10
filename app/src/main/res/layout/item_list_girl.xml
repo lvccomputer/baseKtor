@@ -19,11 +19,12 @@
         android:scaleType="fitXY"
         tools:src="@drawable/test" />
 
-    <FrameLayout
-        android:id="@+id/frameSelected"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/red_transparent"
-        android:visibility="gone" />
+    <ImageView
+        android:id="@+id/imgChecked"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_100sdp"
+        android:src="@drawable/ic_checked"
+        android:layout_gravity="center"
+        app:tint="@color/red_radish" />
 
 </androidx.cardview.widget.CardView>

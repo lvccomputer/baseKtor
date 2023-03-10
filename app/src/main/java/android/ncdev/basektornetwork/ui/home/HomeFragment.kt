@@ -22,11 +22,12 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     @Inject
     lateinit var imageLoader: ImageLoader
+
     private val girlAdapter by lazy {
         fun onClicked(girlModel: GirlModelUI) {
             viewModel.setSelected(girlModel.id)
         }
-        GirlAdapter(::onClicked, imageLoader)
+        GirlAdapter(::onClicked)
     }
 
     override fun initView() {
@@ -36,7 +37,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     override fun observeViewModels() = with(viewModel) {
         girlPhotoListFlow.observe {
-            girlAdapter.submitList(it){
+            girlAdapter.submitList(it) {
                 mIsLoading = false
             }
             viewModel.limit += 60

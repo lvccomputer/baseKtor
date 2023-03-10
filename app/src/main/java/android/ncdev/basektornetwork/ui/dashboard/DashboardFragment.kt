@@ -1,42 +1,30 @@
 package android.ncdev.basektornetwork.ui.dashboard
 
+import android.ncdev.basektornetwork.R
+import android.ncdev.basektornetwork.core.base.BaseFragment
 import android.ncdev.basektornetwork.databinding.FragmentDashboardBinding
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import android.ncdev.common.utils.extensions.formatNumber
+import android.ncdev.common.utils.viewbinding.viewBinding
+import androidx.core.widget.doAfterTextChanged
+import androidx.fragment.app.viewModels
 
-class DashboardFragment : Fragment() {
+class DashboardFragment : BaseFragment(R.layout.fragment_dashboard) {
 
-    private var _binding: FragmentDashboardBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(DashboardViewModel::class.java)
-
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+    private val binding by viewBinding(FragmentDashboardBinding::bind)
+    private val viewModel by viewModels<DashboardViewModel>()
+    override fun initView() {
+        binding.edtNumber.doAfterTextChanged {
+            viewModel.rawNumber = it.also { !it.isNullOrBlank() }.toString()
         }
-        return root
+
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun observeViewModels() {
+        viewModel.dotNumberFormatFlow.observe {
+            binding.tvFormatComma.text = it.toBigDecimal().formatNumber()
+            binding.tvFormatComma.text = it.toBigDecimal().formatNumber()
+            binding.tvFormatComma.text = it.toBigDecimal().formatNumber()
+        }
     }
+
 }

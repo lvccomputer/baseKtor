@@ -58,5 +58,5 @@ fun ImageView.setImageUrl(
     GlideApp.with(context).apply {
         val image = placeholder ?: return@apply
         placeholder(image)
-    }.load(url).thumbnail(0.3f).into(this)
+    }.load(url).thumbnail(0.5f).into(this)
 }

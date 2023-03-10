@@ -9,16 +9,13 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.ImageLoader
 
 
 class GirlAdapter(
-    private val onClicked: (GirlModelUI) -> Unit,
-    private val imageLoader: ImageLoader
-) :
-    ListAdapter<GirlModelUI, GirlAdapter.ItemVH>(GirlDiffCallback) {
+    private val onClicked: (GirlModelUI) -> Unit
+) : ListAdapter<GirlModelUI, GirlAdapter.ItemVH>(GirlDiffCallback) {
 
-    class ItemVH(private val binding: ItemListGirlBinding, private val imageLoader: ImageLoader) :
+    class ItemVH(private val binding: ItemListGirlBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: GirlModelUI) {
             binding.imgGirl.setImageUrl(item.url)
@@ -27,13 +24,13 @@ class GirlAdapter(
 
 
         fun bindSelectionState(isSelected: Boolean) {
-            binding.frameSelected.isVisible = isSelected
+            binding.imgChecked.isVisible = isSelected
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemVH {
         return ItemListGirlBinding.inflate(LayoutInflater.from(parent.context), parent, false).run {
-            ItemVH(this, imageLoader).apply {
+            ItemVH(this).apply {
                 itemView.setOnClickListener {
                     if (adapterPosition != RecyclerView.NO_POSITION) {
                         onClicked.invoke(getItem(adapterPosition))
