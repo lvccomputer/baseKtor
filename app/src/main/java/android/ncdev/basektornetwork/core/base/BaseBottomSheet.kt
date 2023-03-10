@@ -4,7 +4,10 @@ import android.ncdev.basektornetwork.R
 import android.ncdev.common.coroutines.Event
 import android.ncdev.common.coroutines.EventObserver
 import android.os.Bundle
-import android.view.*
+import android.view.ContextThemeWrapper
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.annotation.LayoutRes
 import androidx.lifecycle.LifecycleOwner

@@ -2,14 +2,12 @@ package android.ncdev.basektornetwork.core.main
 
 import android.ncdev.basektornetwork.R
 import android.ncdev.basektornetwork.core.base.BaseActivity
-import android.os.Bundle
 import android.ncdev.basektornetwork.databinding.ActivityMainBinding
 import android.ncdev.common.utils.viewbinding.viewBinding
-import android.view.MenuItem
+import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.navigation.NavigationBarView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

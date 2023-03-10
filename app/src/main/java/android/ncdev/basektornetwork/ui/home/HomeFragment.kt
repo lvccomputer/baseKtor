@@ -5,19 +5,12 @@ import android.ncdev.basektornetwork.core.base.BaseFragment
 import android.ncdev.basektornetwork.databinding.FragmentHomeBinding
 import android.ncdev.basektornetwork.ui.home.adapter.GirlAdapter
 import android.ncdev.common.utils.viewbinding.viewBinding
-import android.ncdev.core_db.model.GirlModel
 import android.ncdev.girl_photo.model.GirlModelUI
-import android.util.Log
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import coil.ImageLoader
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
