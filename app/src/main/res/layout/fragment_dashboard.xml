@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingHorizontal="@dimen/_10sdp"
     android:orientation="vertical"
     tools:context=".ui.dashboard.DashboardFragment">
 
@@ -19,34 +20,120 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:hint="0.00" />
+            android:hint="0.00"
+            android:inputType="numberDecimal" />
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/tvFormatDot"
+        style="@style/TextAppearance.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Format with COMMA" />
+
+    <TextView
+        android:id="@+id/tvComma"
         style="@style/TextAppearance.ToolbarTitle"
+        android:textColor="@color/red_radish"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="100.000" />
 
     <TextView
-        android:id="@+id/tvFormatComma"
+        style="@style/TextAppearance.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Format with DOT" />
+
+    <TextView
+        android:id="@+id/tvDot"
         style="@style/TextAppearance.ToolbarTitle"
+        android:textColor="@color/blue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="100,000" />
 
     <TextView
-        android:id="@+id/tvFormatDotUSD"
+        style="@style/TextAppearance.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Format with PREFIX" />
+
+    <TextView
+        android:id="@+id/tvPrefix"
         style="@style/TextAppearance.ToolbarTitle"
+        android:textColor="@color/yellow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="~100.000$" />
 
     <TextView
-        android:id="@+id/tvFormatAll"
+        style="@style/TextAppearance.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Format with SUFFIX" />
+
+    <TextView
+        android:id="@+id/tvSuffix"
+        style="@style/TextAppearance.ToolbarTitle"
+        android:textColor="@color/purple"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="~100.000 USD" />
+
+    <TextView
+        style="@style/TextAppearance.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Format with PREFIX and SUFFIX" />
+
+    <TextView
+        android:id="@+id/tvPrefixAndSuffix"
         style="@style/TextAppearance.ToolbarTitle"
         android:layout_width="match_parent"
+        android:textColor="@color/orange"
+        android:layout_height="wrap_content"
+        tools:text="~100.000 USD" />
+
+    <TextView
+        style="@style/TextAppearance.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Format with Maxfraction = 6" />
+
+    <TextView
+        android:id="@+id/tvMaxFraction6"
+        style="@style/TextAppearance.ToolbarTitle"
+        android:layout_width="match_parent"
+        android:textColor="#9C27B0"
+        android:layout_height="wrap_content"
+        tools:text="~100.000 USD" />
+
+    <TextView
+        style="@style/TextAppearance.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Format with Maxfraction = 12" />
+
+    <TextView
+        android:id="@+id/tvMaxFraction12"
+        style="@style/TextAppearance.ToolbarTitle"
+        android:layout_width="match_parent"
+        android:textColor="#4CAF50"
+
+        android:layout_height="wrap_content"
+        tools:text="~100.000 USD" />
+    <TextView
+        style="@style/TextAppearance.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Format with Not Group" />
+
+    <TextView
+        android:id="@+id/tvNotGroup"
+        style="@style/TextAppearance.ToolbarTitle"
+        android:layout_width="match_parent"
+        android:textColor="#FD33FA"
+
         android:layout_height="wrap_content"
         tools:text="~100.000 USD" />
 </LinearLayout>

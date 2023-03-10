@@ -4,9 +4,11 @@ import android.ncdev.basektornetwork.R
 import android.ncdev.basektornetwork.core.base.BaseFragment
 import android.ncdev.basektornetwork.databinding.FragmentDashboardBinding
 import android.ncdev.common.utils.extensions.formatNumber
+import android.ncdev.common.utils.extensions.toBigDecimalOrZero
 import android.ncdev.common.utils.viewbinding.viewBinding
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
+import java.util.*
 
 class DashboardFragment : BaseFragment(R.layout.fragment_dashboard) {
 
@@ -14,16 +16,27 @@ class DashboardFragment : BaseFragment(R.layout.fragment_dashboard) {
     private val viewModel by viewModels<DashboardViewModel>()
     override fun initView() {
         binding.edtNumber.doAfterTextChanged {
-            viewModel.rawNumber = it.also { !it.isNullOrBlank() }.toString()
+            val value = if (it.isNullOrBlank()){
+                "0"
+            } else it.toString()
+            viewModel.rawNumber = value
         }
 
     }
 
     override fun observeViewModels() {
         viewModel.dotNumberFormatFlow.observe {
-            binding.tvFormatComma.text = it.toBigDecimal().formatNumber()
-            binding.tvFormatComma.text = it.toBigDecimal().formatNumber()
-            binding.tvFormatComma.text = it.toBigDecimal().formatNumber()
+            binding.tvComma.text = it.toBigDecimalOrZero().formatNumber()
+            binding.tvDot.text = it.toBigDecimalOrZero().formatNumber(Locale("vi","VN"))
+            binding.tvSuffix.text = it.toBigDecimalOrZero().formatNumber(suffix = "$")
+            binding.tvPrefix.text = it.toBigDecimalOrZero().formatNumber(prefix = "$")
+            binding.tvPrefixAndSuffix.text = it.toBigDecimalOrZero().formatNumber(prefix = "~", suffix = "$")
+            binding.tvMaxFraction6.text =
+                it.toBigDecimalOrZero().formatNumber(prefix = "~", suffix = "$", maxFraction = 6)
+            binding.tvMaxFraction12.text =
+                it.toBigDecimalOrZero().formatNumber(prefix = "~", suffix = "$", maxFraction = 12)
+            binding.tvNotGroup.text =
+                it.toBigDecimalOrZero().formatNumber(prefix = "~", suffix = "USD", isGroupingUsed = false)
         }
     }
 
