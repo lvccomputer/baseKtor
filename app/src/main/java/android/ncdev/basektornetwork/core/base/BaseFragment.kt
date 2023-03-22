@@ -20,6 +20,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
+import androidx.viewbinding.ViewBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.flow.Flow
 
@@ -30,6 +31,7 @@ abstract class BaseFragment(@LayoutRes private val layoutResId: Int) : Fragment(
     open val hideBottomBar: Boolean = false
 
     open val isSendTracking: Boolean = true
+    abstract val binding : ViewBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

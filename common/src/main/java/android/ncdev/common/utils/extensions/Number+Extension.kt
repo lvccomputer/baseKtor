@@ -19,7 +19,6 @@ fun String.toBigIntegerOrZero(): BigInteger {
 fun String.toBigDecimalOrZero(): BigDecimal {
     return toBigDecimalOrNull() ?: BigDecimal.ZERO
 }
-
 fun BigDecimal.formatNumber(
     locale: Locale? = null,
     prefix: String = "",

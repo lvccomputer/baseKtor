@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment(R.layout.fragment_home) {
-    private val binding by viewBinding(FragmentHomeBinding::bind)
+    override val binding by viewBinding(FragmentHomeBinding::bind)
     private val viewModel by viewModels<HomeViewModel>()
     private var mIsLoading = false
 

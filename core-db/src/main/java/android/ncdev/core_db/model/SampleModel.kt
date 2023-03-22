@@ -1,5 +1,6 @@
 package android.ncdev.core_db.model
 
+import android.media.audiofx.Equalizer
 import android.os.Parcelable
 import io.realm.RealmObject
 import kotlinx.parcelize.Parcelize
@@ -8,4 +9,6 @@ import kotlinx.parcelize.Parcelize
 open class SampleModel(
     var id: Long = 0,
     var name: String = ""
-) : RealmObject(), Parcelable
+) : RealmObject(), Parcelable {
+
+}
